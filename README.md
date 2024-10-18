@@ -4,12 +4,17 @@
 
 ```bash
 pip install -r requirements.txt
-cd src/
-uvicorn main:app
+uvicorn src.main:app --reload
 ```
+
+Access <http://localhost:8000/>
 
 ## Run with docker compose
 
 ```bash
 docker compose up --build --force-recreate
 ```
+
+## Docs
+
+- <http://localhost:8000/docs>
