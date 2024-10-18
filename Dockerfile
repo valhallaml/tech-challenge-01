@@ -1,14 +1,31 @@
-FROM python:3.9
+FROM python:3.10-slim
 
-WORKDIR /code
+WORKDIR /app/src
 
-COPY ./requirements.txt /app/requirements.txt
+RUN addgroup \
+        --gid 1000 \
+        app \
+    && adduser \
+        --uid 1000 \
+        --gid 1000 \
+        --disabled-password \
+        --quiet \
+        app
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+USER app
 
-COPY ./app /code/app
+COPY --chown=app:app requirements.txt /app/requirements.txt
 
-CMD ["fastapi", "run", "app/main.py", "--port", "80"]
+ENV PATH="/home/app/.local/bin:${PATH}"
 
-# If running behind a proxy like Nginx or Traefik add --proxy-headers
-# CMD ["fastapi", "run", "app/main.py", "--port", "80", "--proxy-headers"]
+RUN pip install \
+    --user \
+    --no-cache-dir \
+    --upgrade \
+    -r /app/requirements.txt
+
+COPY ./src .
+
+CMD [ "uvicorn", "main:app", "--host=0.0.0.0" ]
+
+EXPOSE 8000

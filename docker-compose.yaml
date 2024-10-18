@@ -1,0 +1,13 @@
+services:
+  challenge:
+    image: valhallaml/challenge
+    build: .
+    ports:
+      - "8000:8000"
+    restart: on-failure
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8000/health/live"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 3
+#      start_period: 5s
