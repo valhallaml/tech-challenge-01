@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from viti_brasil import Embrapa
 
 app = FastAPI(
     title = "API Embrapa's viticulture",
@@ -9,4 +10,7 @@ app = FastAPI(
 
 @app.get('/')
 async def root():
-    return { "message": "Hello World" }
+
+    data = Embrapa.get_production()
+
+    return { "message": data.head() }
