@@ -10,7 +10,4 @@ app = FastAPI(
 
 @app.get('/')
 async def root():
-
-    data = Embrapa.get_production()
-
-    return { "message": data.head() }
+    return Embrapa.get_production()

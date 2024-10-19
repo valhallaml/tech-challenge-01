@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import json
 from io import StringIO
 
 class Download:
@@ -9,6 +10,7 @@ class Download:
         response = requests.get(url)
         if response.status_code == 200:
             csv_content = StringIO(response.text)
-            return pd.read_csv(csv_content)
+            data = pd.read_csv(csv_content, delimiter=';')
+            return json.loads(data.to_json(orient='records'))
         else:
             print(f"Fail to download CSV. Status: {response.status_code}")
