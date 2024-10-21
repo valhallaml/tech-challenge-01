@@ -8,8 +8,8 @@ from download import Download
 
 class Embrapa:
 
-    # _base_url = 'http://vitibrasil.cnpuv.embrapa.br/download'
-    _base_url = 'http://embrapa'
+    _base_url = 'http://vitibrasil.cnpuv.embrapa.br/download'
+    # _base_url = 'http://embrapa'
 
     @staticmethod
     def get_production():
