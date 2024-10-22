@@ -25,8 +25,7 @@ source .venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
-cd src/
-python -m uvicorn main:app --reload
+python src/main.py
 ```
 
 Access <http://localhost:8000/>
