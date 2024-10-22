@@ -12,7 +12,7 @@
 ### Create
 
 ```bash
-python3 -m venv .venv
+python -m venv .venv
 ```
 
 ### Active
@@ -26,7 +26,7 @@ source .venv/bin/activate
 ```bash
 pip install -r requirements.txt
 cd src/
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 ```
 
 Access <http://localhost:8000/>

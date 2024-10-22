@@ -8,6 +8,6 @@ app = FastAPI(
     version = '1.0.0'
 )
 
-@app.get('/')
-async def root():
+@app.get('/production')
+async def get_production():
     return Embrapa.get_production()
