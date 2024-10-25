@@ -5,10 +5,10 @@ from pydantic import BaseModel
 
 from core.auth import oauth2_schema
 from core.configs import settings
-from model.usuario import Usuario
+from model.user import User
 from core.database import SessionLocal
 
-from repository.usuario_repository import UsuarioRepository
+from repository.user_repository import UserRepository
 
 
 class TokenData(BaseModel):
@@ -23,7 +23,7 @@ def get_session():
         db.close()
 
 
-async def get_current_user(db: SessionLocal = Depends(get_session), token: str = Depends(oauth2_schema)) -> Usuario:
+async def get_current_user(db: SessionLocal = Depends(get_session), token: str = Depends(oauth2_schema)) -> User:
     credential_exception: HTTPException = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail='Não foi possível autenticar a credencial',
@@ -45,9 +45,9 @@ async def get_current_user(db: SessionLocal = Depends(get_session), token: str =
     except JWTError:
         raise credential_exception
 
-    usuario: Usuario = UsuarioRepository.find_by_id(db, token_data.username)
-    if usuario is None:
+    user: User = UserRepository.find_by_id(db, token_data.username)
+    if user is None:
         raise credential_exception
 
-    return usuario
+    return user
 
