@@ -32,8 +32,8 @@ async def post_usuario(usuario: UsuarioSchemaCreate, db: SessionLocal = Depends(
                             detail='Já existe um usuário com este email cadastrado.')
 
 @router.post('/login')
-async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    usuario = await autenticar(email=form_data.username, senha=form_data.password)
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: SessionLocal = Depends(get_session)):
+    usuario = await autenticar(email=form_data.username, senha=form_data.password , db=db)
 
     if not usuario:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,

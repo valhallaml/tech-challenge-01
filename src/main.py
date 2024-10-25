@@ -15,8 +15,7 @@ app = FastAPI(
     version = '1.0.0'
 )
 
-app.include_router(api_router,prefix=settings.API_V1_STR,tags=['vitis'])
-app.include_router(api_router,prefix=settings.API_V1_STR,tags=['usuarios'])
+app.include_router(api_router,prefix=settings.API_V1_STR)
 
 if __name__ == '__main__':
     environment = os.getenv('ENVIRONMENT', 'development')

@@ -1,8 +1,8 @@
 from pytz import timezone
 
-from typing import Optional, List
+from typing import Optional
 from datetime import datetime, timedelta
-
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 
 from jose import jwt
@@ -11,19 +11,17 @@ from model.usuario import Usuario
 from core.configs import settings
 from core.security import verificar_senha
 from pydantic import EmailStr
+from core.database import SessionLocal
 
+from repository.usuario_repository import UsuarioRepository
 
 oauth2_schema = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.API_V1_STR}/usuarios/login"
+    tokenUrl=f"{settings.API_V1_STR}/usuario/login"
 )
 
 
-async def autenticar(email: EmailStr, senha: str) -> Optional[Usuario]:
-        usuario = Usuario()
-        usuario.nome = "admin"
-        usuario.email = "admin@viti.com"
-        usuario.senha = "123456"
-
+async def autenticar(email: EmailStr, senha: str, db: SessionLocal) -> Optional[Usuario]:
+        usuario: Usuario = UsuarioRepository.find_by_email(db, email)
         if not usuario:
             return None
 
@@ -35,7 +33,7 @@ async def autenticar(email: EmailStr, senha: str) -> Optional[Usuario]:
 def _criar_token(tipo_token: str, tempo_vida: timedelta, sub: str) -> str:
     payload = {}
 
-    sp = timezone('America/Sao_Paulo')
+    sp = timezone('America/Fortaleza')
     expira = datetime.now(tz=sp) + tempo_vida
 
     payload["type"] = tipo_token

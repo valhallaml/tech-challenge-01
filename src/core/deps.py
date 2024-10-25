@@ -45,7 +45,7 @@ async def get_current_user(db: SessionLocal = Depends(get_session), token: str =
     except JWTError:
         raise credential_exception
 
-    usuario: Usuario = UsuarioRepository.find_by_username(token_data.username)
+    usuario: Usuario = UsuarioRepository.find_by_id(db, token_data.username)
     if usuario is None:
         raise credential_exception
 

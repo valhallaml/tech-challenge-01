@@ -21,8 +21,12 @@ class UsuarioRepository:
         return db.query(Usuario).filter(Usuario.id == id).first()
 
     @staticmethod
-    def find_by_username(db: Session, username: str) -> Usuario:
-        return db.query(Usuario).filter(Usuario.username == username).first()
+    def find_by_username(db: Session, nome: str) -> Usuario:
+        return db.query(Usuario).filter(Usuario.nome == nome).first()
+
+    @staticmethod
+    def find_by_email(db: Session, email: str) -> Usuario:
+        return db.query(Usuario).filter(Usuario.email == email).first()
 
     @staticmethod
     def exists_by_id(db: Session, id: int) -> bool:
