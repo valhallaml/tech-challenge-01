@@ -21,4 +21,4 @@ async def get_production(product_id: int):
 if __name__ == '__main__':
     environment = os.getenv('ENVIRONMENT', 'development')
     is_dev = environment == 'development'
-    uvicorn.run(app='main:app', host="0.0.0.0", port=8000, reload=is_dev, workers=1)
+    uvicorn.run(app='main:app', host="0.0.0.0", port=8000, reload=is_dev)

@@ -11,7 +11,7 @@ class Embrapa:
 
     @staticmethod
     def get_production(product_id: int = None):
-        data = Download.to_data('Producao.csv')
+        data = Download.get_file('Producao.csv')
         if product_id is not None:
             data = data[data['id'] == product_id]
             del data['id']

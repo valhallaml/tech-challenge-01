@@ -1,5 +1,5 @@
-import requests
 import os
+import requests
 import pandas as pd
 
 from io import StringIO
@@ -16,7 +16,7 @@ class Download:
 
     @staticmethod
     def __download_remote_file(filename: str):
-        """Download remote file and create cache"""
+        """Download remote file and create cache."""
         try:
             response = requests.get(f'{Download._BASE_REMOTE_URL}{filename}')
             response.raise_for_status()
@@ -33,7 +33,7 @@ class Download:
 
     @staticmethod
     def __get_file_cache(filename: str):
-        """xxx"""
+        """Get file from cache if exists."""
         cached_data = Download._cache.get(filename)
 
         if cached_data:
@@ -42,7 +42,7 @@ class Download:
 
     @staticmethod
     def __get_file_local(filename: str):
-        """xxx"""
+        """Get file from local disk"""
         local_file_path = os.path.join(Download._BASE_LOCAL_URL, filename)
 
         if os.path.exists(local_file_path):
@@ -58,7 +58,7 @@ class Download:
 
     @staticmethod
     def _get_data(filename: str):
-        """xxx"""
+        """Get file content."""
         # 1. try to find the file in the cache
         data = Download.__get_file_cache(filename)
         if data is not None:
@@ -77,8 +77,8 @@ class Download:
         raise Exception(f'Could not get file {filename} from any source.')
 
     @staticmethod
-    def to_data(filename: str):
-        """xxx"""
+    def get_file(filename: str):
+        """Get file from name."""
         data = Download._get_data(filename)
         csv_content = StringIO(data)
         return pd.read_csv(csv_content, delimiter=';', encoding='UTF-8')
