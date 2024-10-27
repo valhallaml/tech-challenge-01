@@ -9,12 +9,9 @@ from download import Download
 
 class Embrapa:
 
-    _base_url = 'http://vitibrasil.cnpuv.embrapa.br/download'
-    # _base_url = 'http://embrapa'
-
     @staticmethod
     def get_production(product_id: int = None):
-        data = Download.to_data(Embrapa._base_url + '/Producao.csv')
+        data = Download.to_data('Producao.csv')
         if product_id is not None:
             data = data[data['id'] == product_id]
             del data['id']
