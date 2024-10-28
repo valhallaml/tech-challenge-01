@@ -1,6 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel, EmailStr
-from core.security import generate_hash_password
+from src.core.security import generate_hash_password
 
 
 class UserSchemaBase(BaseModel):

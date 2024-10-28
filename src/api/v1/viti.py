@@ -1,8 +1,8 @@
 
-from service.viti_brasil import Embrapa
+from src.service.viti_brasil import Embrapa
 from fastapi import APIRouter, Depends
-from core.deps import get_current_user
-from model.user import User
+from src.core.deps import get_current_user
+from src.model.user import User
 
 router = APIRouter()
 
