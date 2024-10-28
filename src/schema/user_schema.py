@@ -8,7 +8,7 @@ class UserSchemaBase(BaseModel):
     username: str
     mail: EmailStr
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserSchemaCreate(UserSchemaBase):
