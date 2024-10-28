@@ -8,13 +8,13 @@ class UserRepository:
         return db.query(User).all()
 
     @staticmethod
-    def save(db: Session, User: User) -> User:
-        if User.id:
-            db.merge(User)
+    def save(db: Session, user: User) -> User:
+        if user.id:
+            db.merge(user)
         else:
-            db.add(User)
+            db.add(user)
         db.commit()
-        return User
+        return user
 
     @staticmethod
     def find_by_id(db: Session, id: int) -> User:

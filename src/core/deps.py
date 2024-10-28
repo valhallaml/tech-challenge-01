@@ -26,7 +26,7 @@ def get_session():
 async def get_current_user(db: SessionLocal = Depends(get_session), token: str = Depends(oauth2_schema)) -> User:
     credential_exception: HTTPException = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail='Não foi possível autenticar a credencial',
+        detail='Unable to authenticate credential',
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
@@ -45,7 +45,7 @@ async def get_current_user(db: SessionLocal = Depends(get_session), token: str =
     except JWTError:
         raise credential_exception
 
-    user: User = UserRepository.find_by_id(db, token_data.username)
+    user: User = UserRepository.find_by_username(db, token_data.username)
     if user is None:
         raise credential_exception
 
