@@ -2,5 +2,6 @@
 *
 
 # Allow files and directories
-!src/
+!src/*.py
+!embrapa/*.csv
 !requirements.txt

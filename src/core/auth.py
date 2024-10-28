@@ -2,7 +2,6 @@ from pytz import timezone
 
 from typing import Optional
 from datetime import datetime, timedelta
-from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 
 from jose import jwt

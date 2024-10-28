@@ -1,7 +1,6 @@
 import os
 import uvicorn
 from fastapi import FastAPI
-from service.viti_brasil import Embrapa
 from api.api import api_router
 from core.configs import settings
 from core.database import Base, engine
