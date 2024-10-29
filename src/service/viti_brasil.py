@@ -1,5 +1,5 @@
 import json
-from download import Download
+from src.service.download import Download
 
 # http://vitibrasil.cnpuv.embrapa.br/download/Producao.csv
 # http://vitibrasil.cnpuv.embrapa.br/download/ProcessaViniferas.csv

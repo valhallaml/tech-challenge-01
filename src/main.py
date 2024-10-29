@@ -1,7 +1,11 @@
 import os
 import uvicorn
 from fastapi import FastAPI
-from viti_brasil import Embrapa
+from api.api import api_router
+from core.configs import settings
+from core.database import Base, engine
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title = "API Embrapa's viticulture",
@@ -10,13 +14,7 @@ app = FastAPI(
     version = '1.0.0'
 )
 
-@app.get('/production')
-async def get_production():
-    return Embrapa.get_production()
-
-@app.get('/production/{product_id}')
-async def get_production(product_id: int):
-    return Embrapa.get_production(product_id)
+app.include_router(api_router,prefix=settings.API_V1_STR)
 
 if __name__ == '__main__':
     environment = os.getenv('ENVIRONMENT', 'development')
