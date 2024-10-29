@@ -11,13 +11,15 @@ RUN addgroup \
         --disabled-password \
         --quiet \
         app \
-    && chown app:app /app/
+    && chown app:app /app/ \
+    && chmod -R 700 /app
 
 USER app
 
-COPY --chown=app:app requirements.txt requirements.txt
-
 ENV PATH="/home/app/.local/bin:${PATH}"
+ENV PYTHONPATH=/app/src
+
+COPY --chown=app:app requirements.txt requirements.txt
 
 RUN pip install \
     --user \
@@ -26,8 +28,9 @@ RUN pip install \
     -r requirements.txt \
     && rm -f requirements.txt
 
-COPY --chown=app:app --chmod=0400 src/ .
-COPY --chown=app:app --chmod=0400 embrapa/ embrapa/
+COPY --chown=app:app --chmod=0500 src src
+COPY --chown=app:app --chmod=0500 embrapa/ /app/embrapa
+COPY --chown=app:app --chmod=0500 viti.db .
 
 CMD [ "uvicorn", "main:app", "--host=0.0.0.0", "--port", "8000" ]
 

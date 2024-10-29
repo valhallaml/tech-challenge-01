@@ -1,9 +1,11 @@
 import os
 import uvicorn
+
 from fastapi import FastAPI
-from api.api import api_router
-from core.configs import settings
+
+from api.router import api_router
 from core.database import Base, engine
+from core.configs import settings
 
 Base.metadata.create_all(bind=engine)
 
