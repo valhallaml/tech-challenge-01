@@ -3,12 +3,12 @@ from fastapi import Depends, HTTPException, status
 from jose import jwt, JWTError
 from pydantic import BaseModel
 
-from src.core.auth import oauth2_schema
-from src.core.configs import settings
-from src.model.user import User
-from src.core.database import SessionLocal
+from core.auth import oauth2_schema
+from core.configs import settings
+from model.user import User
+from core.database import SessionLocal
 
-from src.repository.user_repository import UserRepository
+from repository.user_repository import UserRepository
 
 
 class TokenData(BaseModel):
