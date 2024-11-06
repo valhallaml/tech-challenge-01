@@ -3,12 +3,12 @@ from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 
-from src.model.user import User
-from src.core.deps import get_current_user
-from src.core.auth import authenticate, create_token_access
-from src.core.database import SessionLocal
-from src.schema.user_schema import UserSchemaCreate, UserSchemaBase
-from src.core.deps import get_session
+from model.user import User
+from core.deps import get_current_user
+from core.auth import authenticate, create_token_access
+from core.database import SessionLocal
+from schema.user_schema import UserSchemaCreate, UserSchemaBase
+from core.deps import get_session
 
 
 from src.repository.user_repository import UserRepository
