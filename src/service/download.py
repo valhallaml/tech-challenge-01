@@ -18,7 +18,7 @@ class Download:
     def __download_remote_file(filename: str):
         """Download remote file and create cache."""
         try:
-            response = requests.get(f'{Download._BASE_REMOTE_URL}{filename}')
+            response = requests.get(f'{Download._BASE_REMOTE_URL}{filename}', timeout=5)
             response.raise_for_status()
             response.encoding = 'UTF-8'
             data = response.text
