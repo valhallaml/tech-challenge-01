@@ -10,7 +10,7 @@ class Download:
 
     _CACHE_DURATION = 3600 # 1 hour
     _BASE_REMOTE_URL = 'http://vitibrasil.cnpuv.embrapa.br/download/'
-    _BASE_LOCAL_URL = '../embrapa/'
+    _BASE_LOCAL_URL = 'embrapa/'
 
     _cache = Cache()
 
