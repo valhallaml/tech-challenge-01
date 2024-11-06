@@ -23,6 +23,8 @@ source .venv/bin/activate
 
 ## Run local
 
+> Before run copy `.env.sample` and rename to `.env`. Replace the variables with the correct values.
+
 ```bash
 pip install -r requirements.txt
 python src/main.py
