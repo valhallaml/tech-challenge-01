@@ -18,7 +18,6 @@ oauth2_schema = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/user/login"
 )
 
-
 async def authenticate(mail: EmailStr, password: str, db: SessionLocal) -> Optional[User]:
         user: User = UserRepository.find_by_mail(db, mail)
         if not user:
@@ -27,7 +26,6 @@ async def authenticate(mail: EmailStr, password: str, db: SessionLocal) -> Optio
         if not verify_password(password, user.password):
             return None
         return user
-
 
 def _create_token(type_token: str, life_time: timedelta, sub: str) -> str:
     payload = {}
@@ -41,7 +39,6 @@ def _create_token(type_token: str, life_time: timedelta, sub: str) -> str:
     payload["sub"] = str(sub)
 
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.ALGORITHM)
-
 
 def create_token_access(sub: str) -> str:
     return _create_token(
