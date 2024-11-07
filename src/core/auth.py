@@ -6,11 +6,11 @@ from fastapi.security import OAuth2PasswordBearer
 
 from jose import jwt
 
-from src.model.user import User
-from src.core.configs import settings
-from src.core.security import verify_password
+from model.user import User
+from core.configs import settings
+from core.security import verify_password
 from pydantic import EmailStr
-from src.core.database import SessionLocal
+from core.database import SessionLocal
 
 from src.repository.user_repository import UserRepository
 
