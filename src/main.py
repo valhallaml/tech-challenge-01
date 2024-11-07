@@ -2,6 +2,7 @@ import os
 import uvicorn
 
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 from api.router import api_router
 from core.database import Base, engine
@@ -16,6 +17,12 @@ app = FastAPI(
     summary = '',
     version = '1.0.0'
 )
+
+@app.get("/", response_class=HTMLResponse)
+async def home():
+    with open("src/home.html") as file:
+        html_content = file.read()
+    return HTMLResponse(content=html_content)
 
 app.include_router(api_router,prefix=settings.API_V1_STR)
 
